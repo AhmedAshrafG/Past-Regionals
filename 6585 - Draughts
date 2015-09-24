@@ -27,12 +27,12 @@ int DFS(int x,int y){
 	//printf("(%d,%d)\n",x,y);
 	int ans = 0;
 	FOR(i,4){
-		int px1 = x+dx[i], py1 = y+dy[i] , px2 = x+dx[i]*2, py2 = y+dy[i]*2;
+		int px1 = x+dx[i], py1 = y+dy[i] , px2 = x+dx[i]*2, py2 = y+dy[i]*2; //attacked piece and destination co-ordinates.
 		if (valid(px2,py2) && grid[px1][py1] == 'B' && grid[px2][py2] == '#'){
 			grid[x][y] = '#';
 			grid[px1][py1] = '#';
 			grid[px2][py2] = 'W';
-			ans = max(ans,1+DFS(px2,py2));
+			ans = max(ans,1+DFS(px2,py2)); //backtrack.
 			grid[x][y] = 'W';
 			grid[px1][py1] = 'B';
 			grid[px2][py2] = '#';
@@ -52,7 +52,7 @@ int main(){
 			takes(grid[i]);
 		FOR(i,n)
 			FOR(j,n)
-				if (grid[i][j] == 'W')
+				if (grid[i][j] == 'W') //try all white pieces.
 					ans = max(ans,DFS(i,j));
 		printf("%d\n",ans);
 	}
